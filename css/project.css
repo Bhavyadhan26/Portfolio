@@ -1,0 +1,108 @@
+/* Global Styles */
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
+  opacity: 0;
+  min-height: 100vh; /* Ensure body covers the entire viewport height */
+  display: flex;
+  flex-direction: column; /* Enable flexible layout */
+  justify-content: space-between; /* Push footer to the bottom */
+}
+
+/* When the page is fully loaded, set opacity to 1 */
+html.loaded, body.loaded {
+  opacity: 1;
+}
+
+/* Projects Container */
+.projects-container {
+  display: flex;
+  justify-content: center; /* Center the boxes horizontally */
+  gap: 20px; /* Space between the boxes */
+  padding: 20px;
+  margin-top: 60px;
+  flex-wrap: wrap; /* Allow wrapping if the container is too small */
+}
+
+/* Project Box */
+.project-box {
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+  margin: 10px;
+  padding: 20px;
+  width: calc(33.333% - 40px); /* Ensure all boxes are the same size */
+  height: 300px; /* Set a default height for the box */
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, height 0.3s ease, margin 0.3s ease;
+  cursor: pointer;
+  overflow: hidden; /* Prevent overflow when expanding */
+  position: relative; /* Important for pop-up effect */
+  z-index: 1; /* Ensure it's on top by default */
+  text-align: center;
+}
+
+/* Hover Effect for Project Box */
+.project-box:hover {
+  transform: scale(1.05); /* Slightly enlarge the box */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  z-index: 10; /* Bring the hovered box above others */
+  height: auto; /* Allow the box to expand to fit its content */
+  margin-top: -20px; /* Make the box "pop-up" by moving it up */
+  filter: none; /* Remove blur from the hovered box */
+}
+
+/* Project Box Title */
+.project-box h3 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: white;
+}
+
+/* Project Box Paragraph */
+.project-box p {
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin-top: 10px;
+  color: #bbb;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Learn More Button */
+.learn-more-btn {
+  display: inline-block;
+  background-color: #ff6347; /* Choose a suitable color */
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+}
+
+/* Hover Effect for Learn More Button */
+.learn-more-btn:hover {
+  background-color: #ff4500; /* Darker shade for hover effect */
+}
+
+/* Style for the footer */
+footer {
+  padding: 10px 0;  /* Add padding to the footer */
+  width: 100%;  /* Make sure the footer spans the full width */
+  margin-top: 0; /* Remove any margin at the top of the footer */
+  bottom: 0;  /* Place the footer at the bottom of the page */
+  position: relative; /* Ensures the footer stays within the normal flow */
+}

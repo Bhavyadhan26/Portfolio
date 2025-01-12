@@ -1,0 +1,97 @@
+/* Footer layout */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin:10px;
+}
+
+/* Left, center, and right sections */
+.footer-section {
+  flex: 1;
+  margin: 0 20px;
+}
+
+/* Footer icons */
+.footer-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-icons a {
+  font-size: 1.9em;
+  color: white;
+  text-decoration: none;
+}
+
+.footer-icons a:hover {
+  color: #ddd;
+}
+
+.footer h2,p{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Footer contact form */
+.footer-right h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.footer-right .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent; /* Match footer background */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.footer-right .contact-form label {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.footer-right .contact-form input,
+.footer-right .contact-form textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+}
+
+.footer-right .contact-form input:focus,
+.footer-right .contact-form textarea:focus {
+  outline: none;
+  background-color: #555;
+}
+
+.footer-right .contact-form button {
+  padding: 8px 15px;
+  font-size: 1.1em;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.footer-right .contact-form button:hover {
+  background-color: #0056b3;
+}
+
+a{
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits the text color from the surrounding element */
+}
+a:hover {
+  text-decoration: underline; /* Optional: Adds underline on hover if you want */
+}

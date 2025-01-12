@@ -1,0 +1,102 @@
+/* Global Styles */
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Content Section */
+.content {
+  font-family: serif;
+  margin-top: 220px;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
+  opacity: 0;
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content h1 {
+  font-size: 3em;
+}
+
+.content p {
+  font-size: 2em;
+  margin-top: 20px;
+}
+
+/* About Me Section - Updated to match skills style */
+.aboutme {
+  width: 100%;
+  max-width: 1200px;
+  margin: 270px auto 0;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.aboutme h2 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  font-size: 2.5rem;
+  color: #00ff88;
+}
+
+.aboutme p {
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+  border-radius: 10px;
+  padding: 2rem;
+  color: #a0a0a0;
+  line-height: 1.6;
+  font-size: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.aboutme p:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.iframe-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  .aboutme {
+    padding: 1rem;
+    margin-top: 200px;
+  }
+  
+  .aboutme p {
+    padding: 1.5rem;
+  }
+}

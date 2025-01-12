@@ -1,0 +1,51 @@
+/* certifications.css */
+body {
+        display: flex;
+}
+
+.certifications-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 2rem;
+}
+
+.certifications-container h2 {
+    font-size: 2.5rem; 
+    text-align: center;
+    margin-bottom: 1.2rem;
+    color: #007bff;
+}
+
+.certifications-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.certifications-list li {
+    font-size: 1rem; /* Matching the paragraph font size in skills */
+    font-family: Verdana, Geneva, Tahoma, sans-serif; /* Matching font-family */
+    color: #a0a0a0; /* Subtle grey text */
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.8rem;
+}
+
+.certifications-list li:last-child {
+    border-bottom: none;
+}
+
+.certification-title {
+    display: block;
+    font-weight: bold;
+    color: white; /* White for bold text */
+    font-size: 1.2rem; /* Slightly larger for emphasis */
+    margin-bottom: 0.4rem;
+}
+
+.issuer {
+    font-size: 0.9rem; /* Slightly smaller for subtext */
+    color: #007bff;
+    display: block;
+}

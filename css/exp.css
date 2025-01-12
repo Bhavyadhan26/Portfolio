@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.left-column {
+    position: sticky;
+    top: 20px;
+    width: 200px;
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Scroll if necessary */
+}
+
+.right-column {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.experience-item {
+    margin-bottom: 40px;
+}
+
+.experience-item h3,
+.experience-item h4,{
+    margin: 0;
+    padding: 5px 0;
+}
+
+.experience-item span 
