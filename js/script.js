@@ -134,4 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
         iframes.forEach(adjustIframeHeight);
     });
 });
-
+window.onload = function() {
+    if(window.location.hash) {
+        document.querySelector(window.location.hash).scrollIntoView({behavior: "smooth"});
+    }
+};
