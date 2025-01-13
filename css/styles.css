@@ -38,7 +38,6 @@ body {
   margin-top: 20px;
 }
 
-/* About Me Section - Updated to match skills style */
 .aboutme {
   width: 100%;
   max-width: 1200px;
@@ -62,7 +61,6 @@ body {
   line-height: 1.6;
   font-size: 1.2rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -73,20 +71,6 @@ body {
 
 html {
   scroll-behavior: smooth;
-}
-
-.iframe-container {
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-
-.iframe-container iframe {
-  width: 100%;
-  border: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 }
 
 /* Media Query for Responsive Design */

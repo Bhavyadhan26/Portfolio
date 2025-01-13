@@ -4,19 +4,11 @@ body {
   color: white;
   margin: 0;
   font-family: Arial, sans-serif;
-  transition: filter 0.3s ease; /* Smooth transition for the blur effect */
   overflow-x: hidden; /* Prevent horizontal scroll */
-  transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
-  opacity: 0;
-  min-height: 100vh; /* Ensure body covers the entire viewport height */
   display: flex;
   flex-direction: column; /* Enable flexible layout */
   justify-content: space-between; /* Push footer to the bottom */
-}
-
-/* When the page is fully loaded, set opacity to 1 */
-html.loaded, body.loaded {
-  opacity: 1;
+  min-height: 100vh; /* Ensure body covers the entire viewport height */
 }
 
 /* Projects Container */
@@ -37,41 +29,36 @@ html.loaded, body.loaded {
   box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
   margin: 10px;
   padding: 20px;
-  width: calc(33.333% - 40px); /* Ensure all boxes are the same size */
-  height: 300px; /* Set a default height for the box */
+  width: calc(33.333% - 40px);
+  height: 200px; /* Default height */
   box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease, height 0.3s ease, margin 0.3s ease;
   cursor: pointer;
-  overflow: hidden; /* Prevent overflow when expanding */
-  position: relative; /* Important for pop-up effect */
-  z-index: 1; /* Ensure it's on top by default */
+  overflow: hidden;
+  position: relative;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-/* Hover Effect for Project Box */
 .project-box:hover {
-  transform: scale(1.05); /* Slightly enlarge the box */
+  transform: scale(1.05);
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
-  z-index: 10; /* Bring the hovered box above others */
-  height: auto; /* Allow the box to expand to fit its content */
-  margin-top: -20px; /* Make the box "pop-up" by moving it up */
-  filter: none; /* Remove blur from the hovered box */
+  height: auto;
 }
 
-/* Project Box Title */
 .project-box h3 {
   font-size: 2em;
-  margin-bottom: 20px;
   color: white;
+  word-wrap: break-word; /* Ensure heading breaks to next line if too long */
+  word-break: break-word; /* Break long words if necessary */
+  white-space: normal; /* Allow text to wrap onto the next line */
 }
 
-/* Project Box Paragraph */
 .project-box p {
-  font-size: 1.2em;
-  line-height: 1.6;
-  margin-top: 10px;
   color: #bbb;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2em;
 }
 
 /* Smooth Scrolling */
@@ -98,11 +85,40 @@ html {
   background-color: #ff4500; /* Darker shade for hover effect */
 }
 
-/* Style for the footer */
-footer {
-  padding: 10px 0;  /* Add padding to the footer */
-  width: 100%;  /* Make sure the footer spans the full width */
-  margin-top: 0; /* Remove any margin at the top of the footer */
-  bottom: 0;  /* Place the footer at the bottom of the page */
-  position: relative; /* Ensures the footer stays within the normal flow */
+/* Responsive Design */
+@media (max-width: 768px) {
+  .projects-container {
+    flex-direction: column; /* Stack boxes vertically on smaller screens */
+    align-items: center; /* Center the boxes */
+  }
+
+  .project-box {
+    width: 80%; /* Take up 80% of the width for smaller screens */
+    height: 200px; /* Set a default height for smaller boxes */
+    margin: 10px 0; /* Add vertical space between stacked boxes */
+    overflow: hidden; /* Ensure overflow is hidden by default */
+  }
+
+  .project-box:hover {
+    height: auto; /* Allow expansion on hover */
+  }
 }
+
+@media (max-width: 480px) {
+  .project-box {
+    width: 90%; /* Take up 90% of the width on very small screens */
+    height: 200px; /* Set a default height for smaller boxes */
+    margin: 10px 0; /* Add vertical space between stacked boxes */
+    overflow: hidden; /* Ensure overflow is hidden by default */
+  }
+
+  .project-box:hover {
+    height: auto; /* Allow expansion on hover */
+  }
+
+  .learn-more-btn {
+    font-size: 0.9em; /* Make the button text smaller on very small screens */
+    padding: 8px 16px; /* Adjust button size */
+  }
+}
+

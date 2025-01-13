@@ -110,45 +110,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1000); // Timeout to allow scrolling to complete
         }
     });
-
-    // Handle manual navigation to About Me section
-    const aboutMeLink = document.querySelector('a[href="#aboutme"]');
-    if (aboutMeLink) {
-        aboutMeLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            isScrolling = true; // Lock scrolling
-            window.scrollTo({
-                top: aboutMeSection.offsetTop - document.querySelector('header').offsetHeight,
-                behavior: 'smooth'
-            });
-
-            setTimeout(() => {
-                isScrolling = false; // Unlock scrolling after timeout
-            }, 1000); // Timeout to allow scrolling to complete
-        });
-    }
-
-    // Handle manual navigation back to Content section from About Me section
-    const contentLink = document.querySelector('a[href="#content"]');
-    if (contentLink) {
-        contentLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            isScrolling = true; // Lock scrolling
-            window.scrollTo({
-                top: contentSection.offsetTop - document.querySelector('header').offsetHeight,
-                behavior: 'smooth'
-            });
-
-            setTimeout(() => {
-                isScrolling = false; // Unlock scrolling after timeout
-            }, 1000); // Timeout to allow scrolling to complete
-        });
-    }
 });
 
 // Add loaded class to html and body once the page is fully loaded
 window.addEventListener('load', () => {
     document.documentElement.classList.add('loaded');
     document.body.classList.add('loaded');
+});
+// Dynamic iframe height adjustment for multiple iframes
+document.addEventListener('DOMContentLoaded', function () {
+    const iframes = document.querySelectorAll('iframe');
+
+    function adjustIframeHeight(iframe) {
+        const iframeContentHeight = iframe.contentWindow.document.body.scrollHeight;
+        iframe.style.height = iframeContentHeight + 'px';
+    }
+
+    iframes.forEach(iframe => {
+        iframe.onload = () => adjustIframeHeight(iframe);
+    });
+
+    window.addEventListener('resize', () => {
+        iframes.forEach(adjustIframeHeight);
+    });
 });
 

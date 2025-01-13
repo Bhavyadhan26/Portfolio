@@ -8,13 +8,15 @@
   color: white;
   box-sizing: border-box;
   border-radius: 10px;
-  margin:10px;
+  margin: 10px;
+  flex-wrap: wrap; /* Allow content to wrap for smaller screens */
 }
 
 /* Left, center, and right sections */
 .footer-section {
   flex: 1;
   margin: 0 20px;
+  min-width: 200px; /* Ensure sections don't shrink too small */
 }
 
 /* Footer icons */
@@ -33,65 +35,46 @@
   color: #ddd;
 }
 
-.footer h2,p{
+.footer h2, p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* Footer contact form */
-.footer-right h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.footer-right .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background-color: transparent; /* Match footer background */
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.footer-right .contact-form label {
-  font-size: 1em;
-  margin-bottom: 5px;
-}
-
-.footer-right .contact-form input,
-.footer-right .contact-form textarea {
-  width: 100%;
-  padding: 8px;
-  font-size: 1em;
-  border: none;
-  border-radius: 5px;
-  background-color: #444;
-  color: white;
-}
-
-.footer-right .contact-form input:focus,
-.footer-right .contact-form textarea:focus {
-  outline: none;
-  background-color: #555;
-}
-
-.footer-right .contact-form button {
-  padding: 8px 15px;
-  font-size: 1.1em;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.footer-right .contact-form button:hover {
-  background-color: #0056b3;
-}
-
-a{
+a {
   text-decoration: none; /* Removes underline */
   color: inherit; /* Inherits the text color from the surrounding element */
 }
+
 a:hover {
   text-decoration: underline; /* Optional: Adds underline on hover if you want */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column; /* Stack sections vertically on small screens */
+    align-items: center;
+  }
+
+  .footer-section {
+    margin: 10px 0;
+    text-align: center; /* Center text for smaller screens */
+  }
+
+  .footer-icons {
+    justify-content: center;
+  }
+
+  .footer h2 {
+    font-size: 1.5em; /* Adjust headline font size for smaller screens */
+  }
+
+  .footer p {
+    font-size: 1em; /* Adjust paragraph font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-icons a {
+    font-size: 1.5em; /* Reduce icon size for mobile screens */
+  }
 }

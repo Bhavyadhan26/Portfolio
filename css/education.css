@@ -7,12 +7,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;  /* Prevent horizontal scroll */
 }
 
 .education-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;  /* Ensure container width is always within viewport */
     padding: 2rem;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 h2 {
@@ -25,6 +27,7 @@ h2 {
 .timeline {
     position: relative;
     padding: 20px 0;
+    overflow: hidden; /* Prevent any overflow in timeline */
 }
 
 .timeline-center-line {
@@ -40,20 +43,19 @@ h2 {
 .timeline-box {
     padding: 20px;
     position: relative;
-    width: 40%;
+    width: 100%;
+    max-width: 45%;  /* Ensure the timeline boxes have a max width */
     margin: 40px 0;
-    animation: fadeInUp 1.5s ease-out forwards;
-    opacity: 0;
+    box-sizing: border-box;  /* Include padding in width calculation */
+    word-wrap: break-word;  /* Ensure text doesn't overflow */
 }
 
 .timeline-box.left {
     left: 0;
-    padding-right: 100px;
 }
 
 .timeline-box.right {
-    left: 50%;
-    padding-left: 40px;
+    left: 55%;
 }
 
 /* Connecting dots */
@@ -127,20 +129,7 @@ h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.timeline-box:nth-child(1) { animation-delay: 0.2s; }
-.timeline-box:nth-child(2) { animation-delay: 0.4s; }
-.timeline-box:nth-child(3) { animation-delay: 0.6s; }
+/* No animations */
 
 @media (max-width: 768px) {
     .timeline-center-line {
@@ -150,6 +139,8 @@ h2 {
     .timeline-box {
         width: 100%;
         padding-left: 45px;
+        margin: 20px 0;  /* Reduce margin for small screens */
+        max-width: 100%;  /* Ensure box takes full width */
     }
 
     .timeline-box.right {
