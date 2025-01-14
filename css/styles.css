@@ -4,6 +4,11 @@ body {
   color: white;
   margin: 0;
   font-family: Arial, sans-serif;
+  opacity:0;
+  transition: opacity 1s ease-in-out; /* Smooth transition for opacity */
+}
+body.loaded {
+  opacity: 1; /* Fully visible when page loads */
 }
 
 /* Content Section */
@@ -14,19 +19,6 @@ body {
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
-  opacity: 0;
-  animation: fadeInUp 1.5s ease-out forwards;
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .content h1 {

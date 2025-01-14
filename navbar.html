@@ -1,19 +1,32 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/navbar.css">
     </head>
-<div class="navbar">
-    <div class="navbar-left">
-        <div class="avatar">BD</div>
-        <b>Bhavya Dhanuka</b>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="index.html">
+                <div class="avatar">BD</div>
+            </a>
+            <b>Bhavya Dhanuka</b>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="navbar-right">
+            <a href="index.html#aboutme">About Me</a>
+            <a href="projects.html">Projects</a>
+            <a onclick="openModal()">Resume</a>
+            <a href="#contact">Contact Me</a>
+        </div>
+        <div id="resumeModal" class="modal">
+            <button class="close-btn" onclick="closeModal()">×</button>
+            <div class="modal-content">
+                <iframe class="pdf-viewer" src="Bhavya_Dhanuka.pdf" type="application/pdf"></iframe>
+            </div>
+        </div>
     </div>
-    <div class="navbar-right">
-        <a href="index.html#aboutme">About Me</a>
-        <a href="projects.html">Projects</a>
-        <a href="Bhavya_Dhanuka.pdf" target="_blank">Resume</a>
-        <a href="#contact">Contact Me</a>
-    </div>
-</div>
+    <script src="js/script.js"></script>
 </html>
-
-

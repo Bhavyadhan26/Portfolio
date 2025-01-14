@@ -13,3 +13,6 @@ document.querySelectorAll('.project-box').forEach(box => {
     });
   });
   
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
