@@ -77,7 +77,6 @@ function handleScreenResize() {
         }
     }
 }
-
 // Initialize hamburger menu functionality
 function initializeHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
@@ -88,6 +87,7 @@ function initializeHamburgerMenu() {
             this.classList.toggle('active');
             navbarRight.classList.toggle('active');
             navbarRight.style.display = navbarRight.classList.contains('active') ? 'flex' : 'none';
+            document.body.classList.toggle('modal-open', navbarRight.classList.contains('active'));
         });
 
         // Close mobile menu when clicking a link

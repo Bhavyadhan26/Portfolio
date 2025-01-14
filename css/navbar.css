@@ -15,7 +15,9 @@
   margin: 10px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
+body.modal-open {
+  overflow: hidden;
+}
 .navbar-left {
   display: flex;
   align-items: center;
