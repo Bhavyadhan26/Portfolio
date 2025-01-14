@@ -77,6 +77,37 @@ function handleScreenResize() {
         }
     }
 }
+// Modal functionality for resume
+function openModal() {
+    const modal = document.getElementById("resumeModal");
+    const hamburger = document.querySelector('.hamburger');
+    if (modal) {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent background scrolling
+        if (hamburger) {
+            hamburger.style.display = "none"; // Hide hamburger when modal is open
+        }
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById("resumeModal");
+    const hamburger = document.querySelector('.hamburger');
+    if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto"; // Restore scrolling
+        if (hamburger && window.innerWidth <= 768) {
+            hamburger.style.display = "flex"; // Show hamburger when modal is closed (only on mobile)
+            // Also ensure menu is closed when modal closes
+            const navbarRight = document.querySelector('.navbar-right');
+            if (navbarRight) {
+                navbarRight.classList.remove('active');
+                navbarRight.style.display = 'none';
+                hamburger.classList.remove('active');
+            }
+        }
+    }
+}
 // Initialize hamburger menu functionality
 function initializeHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
@@ -109,34 +140,3 @@ window.addEventListener("load", () => {
     document.body.classList.add("loaded");
 });
 
-// Modal functionality for resume
-function openModal() {
-    const modal = document.getElementById("resumeModal");
-    const hamburger = document.querySelector('.hamburger');
-    if (modal) {
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
-        if (hamburger) {
-            hamburger.style.display = "none"; // Hide hamburger when modal is open
-        }
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById("resumeModal");
-    const hamburger = document.querySelector('.hamburger');
-    if (modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto"; // Restore scrolling
-        if (hamburger && window.innerWidth <= 768) {
-            hamburger.style.display = "flex"; // Show hamburger when modal is closed (only on mobile)
-            // Also ensure menu is closed when modal closes
-            const navbarRight = document.querySelector('.navbar-right');
-            if (navbarRight) {
-                navbarRight.classList.remove('active');
-                navbarRight.style.display = 'none';
-                hamburger.classList.remove('active');
-            }
-        }
-    }
-}
