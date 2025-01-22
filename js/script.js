@@ -1,63 +1,59 @@
-// Fetch and inject navbar and footer
-document.addEventListener("DOMContentLoaded", function () {
-    const header = document.querySelector("header");
-    const footer = document.querySelector("footer");
-    const iframes = document.querySelectorAll("iframe");
+// Track loading state of all components
+let state = {
+    navbarLoaded: false,
+    footerLoaded: false,
+    iframesLoaded: 0,
+    totalIframes: 0
+};
 
-    if (header) {
-        fetch("navbar.html")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text();
-            })
-            .then(data => {
-                header.innerHTML = data;
-                // Initialize hamburger menu after navbar is loaded
-                initializeHamburgerMenu();
-                // Initial check for screen size
-                handleScreenResize();
-            })
-            .catch(error => {
-                console.error("There has been a problem with your fetch operation for navbar:", error);
-            });
+// Utility function to fetch content with error handling
+function fetchContent(url, element) {
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .catch(error => {
+            console.error(`Failed to load ${url}:`, error);
+            element.innerHTML = '<p>Content temporarily unavailable. Please refresh the page.</p>';
+            throw error;
+        });
+}
+
+// Check if all content is loaded and initialize page
+function checkAllContentLoaded() {
+    if (state.navbarLoaded && 
+        state.footerLoaded && 
+        state.iframesLoaded === state.totalIframes) {
+        document.body.classList.add('loaded');
+        document.documentElement.classList.add('loaded');
     }
+}
 
-    if (footer) {
-        fetch("footer.html")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text();
-            })
-            .then(data => {
-                footer.innerHTML = data;
-            })
-            .catch(error => {
-                console.error("There has been a problem with your fetch operation for footer:", error);
-            });
-    }
-
-    function adjustIframeHeight(iframe) {
+// Handle iframe height adjustments using ResizeObserver
+function adjustIframeHeight(iframe) {
+    try {
+        const observer = new ResizeObserver(() => {
+            const height = iframe.contentWindow.document.body.scrollHeight;
+            iframe.style.height = `${height}px`;
+        });
+        
+        if (iframe.contentWindow && iframe.contentWindow.document.body) {
+            observer.observe(iframe.contentWindow.document.body);
+        }
+    } catch (error) {
+        console.error("Error adjusting iframe height:", error);
+        // Fallback method
         try {
-            const iframeContentHeight = iframe.contentWindow.document.body.scrollHeight;
-            iframe.style.height = iframeContentHeight + "px";
-        } catch (error) {
-            console.error("Error adjusting iframe height:", error);
+            const height = iframe.contentWindow.document.body.scrollHeight;
+            iframe.style.height = `${height}px`;
+        } catch (e) {
+            console.error("Fallback iframe adjustment failed:", e);
         }
     }
-
-    iframes.forEach((iframe) => {
-        iframe.onload = () => adjustIframeHeight(iframe);
-    });
-
-    window.addEventListener("resize", () => {
-        iframes.forEach(adjustIframeHeight);
-        handleScreenResize();
-    });
-});
+}
 
 // Handle screen resize and menu visibility
 function handleScreenResize() {
@@ -70,44 +66,16 @@ function handleScreenResize() {
             navbarRight.style.display = 'flex';
             navbarRight.classList.remove('active');
             hamburger.classList.remove('active');
+            document.body.classList.remove('modal-open');
         } else {
             hamburger.style.display = 'flex';
-            navbarRight.style.display = 'none';
-            navbarRight.classList.remove('active');
-        }
-    }
-}
-// Modal functionality for resume
-function openModal() {
-    const modal = document.getElementById("resumeModal");
-    const hamburger = document.querySelector('.hamburger');
-    if (modal) {
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden"; // Prevent background scrolling
-        if (hamburger) {
-            hamburger.style.display = "none"; // Hide hamburger when modal is open
-        }
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById("resumeModal");
-    const hamburger = document.querySelector('.hamburger');
-    if (modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto"; // Restore scrolling
-        if (hamburger && window.innerWidth <= 768) {
-            hamburger.style.display = "flex"; // Show hamburger when modal is closed (only on mobile)
-            // Also ensure menu is closed when modal closes
-            const navbarRight = document.querySelector('.navbar-right');
-            if (navbarRight) {
-                navbarRight.classList.remove('active');
+            if (!navbarRight.classList.contains('active')) {
                 navbarRight.style.display = 'none';
-                hamburger.classList.remove('active');
             }
         }
     }
 }
+
 // Initialize hamburger menu functionality
 function initializeHamburgerMenu() {
     const hamburger = document.querySelector('.hamburger');
@@ -120,23 +88,142 @@ function initializeHamburgerMenu() {
             navbarRight.style.display = navbarRight.classList.contains('active') ? 'flex' : 'none';
             document.body.classList.toggle('modal-open', navbarRight.classList.contains('active'));
         });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.navbar-right a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth <= 768) {
-                    hamburger.classList.remove('active');
-                    navbarRight.classList.remove('active');
-                    navbarRight.style.display = 'none';
-                }
-            });
-        });
     }
 }
 
-// Add loaded class to html and body once the page is fully loaded
-window.addEventListener("load", () => {
-    document.documentElement.classList.add("loaded");
-    document.body.classList.add("loaded");
+function initializeSmoothScrolling() {
+    document.querySelectorAll('.navbar-right a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const href = link.getAttribute('href');
+            
+            // Skip if no href
+            if (!href) return;
+
+            // Handle cross-page navigation with hash
+            if (href.includes('#')) {
+                const [pagePath, hash] = href.split('#');
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+                // If we're on a different page, let the normal navigation happen
+                if (pagePath && pagePath !== currentPage) {
+                    // Just let the normal navigation occur
+                    return;
+                }
+
+                // If we're on the same page, handle smooth scrolling
+                e.preventDefault();
+                const targetElement = document.getElementById(hash);
+                
+                // Close mobile menu
+                if (window.innerWidth <= 768) {
+                    const hamburger = document.querySelector('.hamburger');
+                    const navbarRight = document.querySelector('.navbar-right');
+                    if (hamburger && navbarRight) {
+                        hamburger.classList.remove('active');
+                        navbarRight.classList.remove('active');
+                        navbarRight.style.display = 'none';
+                        document.body.classList.remove('modal-open');
+                    }
+                }
+
+                // Scroll if target exists
+                if (targetElement) {
+                    setTimeout(() => {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }, 100);
+                }
+            }
+        });
+    });
+}
+
+// Modal functionality
+function openModal() {
+    const modal = document.getElementById("resumeModal");
+    const hamburger = document.querySelector('.hamburger');
+    if (modal) {
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        if (hamburger) {
+            hamburger.style.display = "none";
+        }
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById("resumeModal");
+    const hamburger = document.querySelector('.hamburger');
+    if (modal) {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+        if (hamburger && window.innerWidth <= 768) {
+            hamburger.style.display = "flex";
+            const navbarRight = document.querySelector('.navbar-right');
+            if (navbarRight) {
+                navbarRight.classList.remove('active');
+                navbarRight.style.display = 'none';
+                hamburger.classList.remove('active');
+            }
+        }
+    }
+}
+
+// Main initialization
+document.addEventListener("DOMContentLoaded", function () {
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const iframes = document.querySelectorAll("iframe");
+    
+    // Set total iframes count
+    state.totalIframes = iframes.length;
+
+    // Load navbar
+    if (header) {
+        fetchContent("navbar.html", header)
+            .then(data => {
+                header.innerHTML = data;
+                initializeHamburgerMenu();
+                initializeSmoothScrolling();
+                handleScreenResize();
+                state.navbarLoaded = true;
+                checkAllContentLoaded();
+            });
+    }
+
+    // Load footer
+    if (footer) {
+        fetchContent("footer.html", footer)
+            .then(data => {
+                footer.innerHTML = data;
+                state.footerLoaded = true;
+                checkAllContentLoaded();
+            });
+    }
+
+    // Initialize iframes
+    iframes.forEach((iframe) => {
+        iframe.onload = () => {
+            adjustIframeHeight(iframe);
+            state.iframesLoaded++;
+            checkAllContentLoaded();
+        };
+    });
+
+    // Debounced resize handler
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            iframes.forEach(adjustIframeHeight);
+            handleScreenResize();
+        }, 250);
+    });
 });
 
+// Handle page load completion
+window.addEventListener("load", () => {
+    checkAllContentLoaded();
+});
